@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JEE Dropper Study Plan & Tips</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chosen Palette: Warm Neutrals (Slate) with a Blue Accent -->
-    <!-- Application Structure Plan: A single-page application designed with two primary tabs: "Study Plan" and "Tips for Attention Span". This tabbed structure allows the user to focus on one major content area at a time, preventing information overload. Within the "Study Plan" tab, content is further organized into collapsible sections for each phase and important notes, enabling users to expand only the details they need. The "Tips" section presents strategies in clear, concise bullet points. This architecture was chosen to provide a highly organized, navigable, and less overwhelming experience for a user with a short attention span, allowing them to easily access specific information without endless scrolling. -->
-    <!-- Visualization & Content Choices: Report Info: Detailed JEE study schedule, subject-wise topics, daily routines, and specific tips for managing attention span. Goal: To present a comprehensive study guide in an easily digestible and interactive format. Viz/Presentation Method: HTML lists, paragraphs, and collapsible sections for textual content. Interaction: Tab switching for main sections, and expand/collapse toggles for sub-sections within the study plan. Justification: This approach breaks down dense information into manageable chunks, aligning with the user's need for segmented content and reducing cognitive load. It allows for quick scanning and focused engagement with specific details. Library/Method: Vanilla JavaScript for tab functionality and collapsible sections. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,6 +12,14 @@
         body {
             font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
+            /* --- Background Image for the whole page --- */
+            background-image: url(your-background-image.jpg.jpg); /* REPLACE with your image path (e.g., 'path/to/my-image.jpg') */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Keeps background fixed when scrolling */
+            color: #e0e0e0; /* Lighter text color for better contrast on background */
+            /* Removed bg-slate-100 here to let the background-image show */
         }
         .tab-button.active {
             background-color: #3b82f6;
@@ -40,17 +44,58 @@
         .arrow-icon.rotated {
             transform: rotate(90deg);
         }
+
+        /* --- Glassmorphism for content containers --- */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+            backdrop-filter: blur(15px) saturate(180%); /* Stronger blur for content */
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Lighter border for light effect */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            color: #f0f0f0; /* Default text color for glass container */
+        }
+
+        /* Adjust text colors inside glass containers for readability */
+        /* These rules override the default Tailwind slate colors for better contrast on glass */
+        .glass-effect .text-slate-800 { color: #f0f0f0; } /* Header text */
+        .glass-effect .text-slate-700 { color: #e0e0e0; } /* Paragraphs, font-semibold */
+        .glass-effect .text-slate-600 { color: #c0c0c0; } /* List items */
+        .glass-effect .bg-slate-50 { background-color: rgba(255, 255, 255, 0.08); } /* Collapsible header background */
+        .glass-effect .hover\\:bg-slate-100:hover { background-color: rgba(255, 255, 255, 0.15); } /* Collapsible header hover */
+        .glass-effect .border-slate-200 { border-color: rgba(255, 255, 255, 0.1); } /* Border around collapsible sections */
+        .glass-effect .arrow-icon { color: #a0a0a0; } /* Arrow icon color */
+        /* Also explicitly set background for collapsible content as it was bg-white originally */
+        .glass-effect .collapsible-content.p-5.bg-white {
+            background-color: rgba(255, 255, 255, 0.05); /* Very light transparency for content area */
+        }
+
+
+        /* Adjust tab button styles for glassmorphism */
+        .tab-button {
+            background-color: rgba(255, 255, 255, 0.1); /* Transparent tab button */
+            color: #e0e0e0; /* Lighter text for inactive tabs */
+            border-bottom: none; /* Remove default border-bottom */
+        }
+        .tab-button.active {
+            background-color: #3b82f6; /* Accent color remains */
+            color: white;
+        }
+        .tab-button.hover\\:bg-slate-50:hover {
+            background-color: rgba(255, 255, 255, 0.2); /* Lighter hover for transparent tabs */
+        }
+        /* Ensure the border below tabs also becomes transparent */
+        .glass-effect .border-b.border-slate-200 {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
-<body class="bg-slate-100">
-
-    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8 min-h-screen">
+<body> <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8 min-h-screen">
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold text-slate-800">Your JEE Dropper Journey</h1>
             <p class="text-lg text-slate-600 mt-2">A personalized plan to conquer JEE Mains by September</p>
         </header>
 
-        <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+        <div class="rounded-2xl shadow-lg p-6 sm:p-8 glass-effect">
             <div class="flex border-b border-slate-200 mb-6">
                 <button id="studyPlanTab" class="tab-button active flex-1 py-3 px-4 text-center text-lg font-medium text-slate-700 rounded-tl-xl hover:bg-slate-50 transition-colors duration-200">Study Plan</button>
                 <button id="tipsTab" class="tab-button flex-1 py-3 px-4 text-center text-lg font-medium text-slate-700 rounded-tr-xl hover:bg-slate-50 transition-colors duration-200">Tips for Attention Span</button>
@@ -61,7 +106,6 @@
                     Welcome to your intensive JEE Mains study plan, designed to help you complete the syllabus by September using your Allen modules. This section outlines a structured approach across two phases, detailing daily routines and weekly topic coverage.
                 </p>
 
-                <!-- Phase 1 -->
                 <div class="mb-6 border border-slate-200 rounded-xl overflow-hidden">
                     <div class="collapsible-header bg-slate-50 p-5 flex justify-between items-center text-slate-800 font-semibold text-lg hover:bg-slate-100 transition-colors duration-200">
                         <span>Phase 1: Foundation Building & Core Concepts (July 9th - August 15th)</span>
@@ -130,7 +174,6 @@
                     </div>
                 </div>
 
-                <!-- Phase 2 -->
                 <div class="mb-6 border border-slate-200 rounded-xl overflow-hidden">
                     <div class="collapsible-header bg-slate-50 p-5 flex justify-between items-center text-slate-800 font-semibold text-lg hover:bg-slate-100 transition-colors duration-200">
                         <span>Phase 2: Advanced Concepts & Intensive Practice (August 16th - September 30th)</span>
@@ -206,7 +249,6 @@
                     </div>
                 </div>
 
-                <!-- Important Notes -->
                 <div class="mb-6 border border-slate-200 rounded-xl overflow-hidden">
                     <div class="collapsible-header bg-slate-50 p-5 flex justify-between items-center text-slate-800 font-semibold text-lg hover:bg-slate-100 transition-colors duration-200">
                         <span>Important Notes for the Time Table</span>
@@ -313,8 +355,7 @@
         </div>
 
         <footer class="text-center mt-8">
-            <p class="text-sm text-slate-500">Designed to support your JEE preparation journey.
-            </p>
+            <p class="text-sm text-slate-500 glass-effect p-2 rounded-lg inline-block">Designed to support your JEE preparation journey.</p>
         </footer>
     </div>
 
