@@ -28,6 +28,32 @@
         .task-item.completed .checkbox-custom svg {
             display: block;
         }
+        .tips {
+  /* Glassmorphism styles */
+  background: rgba(63, 199, 142, 0.2); /* White with 20% opacity */
+  backdrop-filter: blur(10px) saturate(180%); /* Blur and saturate background */
+  -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
+  border-radius: 10px; /* Slightly rounded corners */
+  border: 1px solid rgba(0, 0, 0, 0.8); /* Black border with 80% opacity */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  /* Button basic styles (adjust as needed) */
+  padding: 10px 20px;
+  color: #000000; /* White text for contrast */
+  text-decoration: none; /* Remove underline from link */
+  font-family: sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.tips:hover {
+  background: rgba(3, 253, 178, 0.3); /* Slightly more opaque on hover */
+}
+
+.tips a {
+  color: inherit; /* Inherit color from parent button */
+  text-decoration: none; /* Ensure link text doesn't have an underline */
+}
     </style>
 </head>
 <body class="bg-slate-100">
@@ -55,7 +81,11 @@
         </main>
         
         <footer class="text-center mt-8">
-            <p class="text-sm text-slate-500">Your progress is saved automatically in your browser.</p>
+            <p class="text-sm text-slate-500">Your progress is saved automatically in your browser.
+            </p><br>
+            <button class="tips">
+                <a href="tips.html">Click Here for tips</a>
+            </button>
         </footer>
     </div>
 

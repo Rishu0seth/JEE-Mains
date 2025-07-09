@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JEE Dropper Study Plan & Tips</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals (Slate) with a Blue Accent -->
+    <!-- Application Structure Plan: A single-page application designed with two primary tabs: "Study Plan" and "Tips for Attention Span". This tabbed structure allows the user to focus on one major content area at a time, preventing information overload. Within the "Study Plan" tab, content is further organized into collapsible sections for each phase and important notes, enabling users to expand only the details they need. The "Tips" section presents strategies in clear, concise bullet points. This architecture was chosen to provide a highly organized, navigable, and less overwhelming experience for a user with a short attention span, allowing them to easily access specific information without endless scrolling. -->
+    <!-- Visualization & Content Choices: Report Info: Detailed JEE study schedule, subject-wise topics, daily routines, and specific tips for managing attention span. Goal: To present a comprehensive study guide in an easily digestible and interactive format. Viz/Presentation Method: HTML lists, paragraphs, and collapsible sections for textual content. Interaction: Tab switching for main sections, and expand/collapse toggles for sub-sections within the study plan. Justification: This approach breaks down dense information into manageable chunks, aligning with the user's need for segmented content and reducing cognitive load. It allows for quick scanning and focused engagement with specific details. Library/Method: Vanilla JavaScript for tab functionality and collapsible sections. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .tab-button.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .collapsible-header {
+            cursor: pointer;
+            user-select: none;
+        }
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .collapsible-content.expanded {
+            max-height: 2000px; /* Sufficiently large value to show all content */
+            transition: max-height 0.5s ease-in;
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease-out;
+        }
+        .arrow-icon.rotated {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8 min-h-screen">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-slate-800">Your JEE Dropper Journey</h1>
+            <p class="text-lg text-slate-600 mt-2">A personalized plan to conquer JEE Mains by September</p>
+        </header>
+
+        <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+            <div class="flex border-b border-slate-200 mb-6">
+                <button id="studyPlanTab" class="tab-button active flex-1 py-3 px-4 text-center text-lg font-medium text-slate-700 rounded-tl-xl hover:bg-slate-50 transition-colors duration-200">Study Plan</button>
+                <button id="tipsTab" class="tab-button flex-1 py-3 px-4 text-center text-lg font-medium text-slate-700 rounded-tr-xl hover:bg-slate-50 transition-colors duration-200">Tips for Attention Span</button>
+            </div>
+
+            <div id="studyPlanContent" class="tab-content">
+                <p class="text-slate-700 mb-6 leading-relaxed">
+                    Welcome to your intensive JEE Mains study plan, designed to help you complete the syllabus by September using your Allen modules. This section outlines a structured approach across two phases, detailing daily routines and weekly topic coverage.
+                </p>
+
+                <!-- Phase 1 -->
+                <div class="mb-6 border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="collapsible-header bg-slate-50 p-5 flex justify-between items-center text-slate-800 font-semibold text-lg hover:bg-slate-100 transition-colors duration-200">
+                        <span>Phase 1: Foundation Building & Core Concepts (July 9th - August 15th)</span>
+                        <span class="arrow-icon text-slate-500 text-2xl">▶</span>
+                    </div>
+                    <div class="collapsible-content p-5 bg-white">
+                        <p class="text-slate-700 mb-4">
+                            <span class="font-medium">Goal:</span> Cover all fundamental concepts and complete the easier chapters from all subjects. Focus on understanding the theory thoroughly and solving basic to moderate problems.
+                        </p>
+                        <h3 class="text-lg font-semibold text-slate-700 mb-3">Daily Schedule (Approximate):</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2 mb-4">
+                            <li><span class="font-medium">Morning (7:00 AM - 10:00 AM):</span> Physics Theory + Practice (1.5 hours theory, 1.5 hours problem-solving)</li>
+                            <li><span class="font-medium">Break (10:00 AM - 10:30 AM)</span></li>
+                            <li><span class="font-medium">Late Morning (10:30 AM - 1:30 PM):</span> Chemistry Theory + Practice (1.5 hours theory, 1.5 hours problem-solving)</li>
+                            <li><span class="font-medium">Lunch & Rest (1:30 PM - 3:00 PM)</span></li>
+                            <li><span class="font-medium">Afternoon (3:00 PM - 6:00 PM):</span> Mathematics Theory + Practice (1.5 hours theory, 1.5 hours problem-solving)</li>
+                            <li><span class="font-medium">Short Break (6:00 PM - 6:30 PM)</span></li>
+                            <li><span class="font-medium">Evening (6:30 PM - 8:30 PM):</span> Revision / Doubt Solving / Weak Area Focus (Review concepts, attempt missed problems, or focus on challenging topics)</li>
+                            <li><span class="font-medium">Dinner & Relax (8:30 PM onwards)</span></li>
+                        </ul>
+                        <h3 class="text-lg font-semibold text-slate-700 mb-3">Weekly Plan (Topics):</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-slate-600">
+                            <div>
+                                <h4 class="font-medium text-slate-700 mb-2">Physics:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>Units & Dimensions</li>
+                                    <li>Kinematics</li>
+                                    <li>Laws of Motion</li>
+                                    <li>Work Energy Power</li>
+                                    <li>Rotational Motion</li>
+                                    <li>Gravitation</li>
+                                    <li>Properties of Solids & Liquids</li>
+                                    <li>Thermodynamics</li>
+                                    <li>KTG</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-slate-700 mb-2">Chemistry:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>Mole Concept</li>
+                                    <li>Atomic Structure</li>
+                                    <li>Chemical Bonding</li>
+                                    <li>States of Matter</li>
+                                    <li>Thermodynamics</li>
+                                    <li>Equilibrium</li>
+                                    <li>Redox Reactions</li>
+                                    <li>Electrochemistry</li>
+                                    <li>Solutions</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-slate-700 mb-2">Mathematics:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>Sets, Relations & Functions</li>
+                                    <li>Quadratic Equations</li>
+                                    <li>Complex Numbers</li>
+                                    <li>Sequences & Series</li>
+                                    <li>Permutations & Combinations</li>
+                                    <li>Binomial Theorem</li>
+                                    <li>Straight Lines</li>
+                                    <li>Circles</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-slate-700 mt-4"><span class="font-medium">End of Phase 1:</span> Take a full-length JEE Main mock test to assess your progress and identify weak areas.</p>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="mb-6 border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="collapsible-header bg-slate-50 p-5 flex justify-between items-center text-slate-800 font-semibold text-lg hover:bg-slate-100 transition-colors duration-200">
+                        <span>Phase 2: Advanced Concepts & Intensive Practice (August 16th - September 30th)</span>
+                        <span class="arrow-icon text-slate-500 text-2xl">▶</span>
+                    </div>
+                    <div class="collapsible-content p-5 bg-white">
+                        <p class="text-slate-700 mb-4">
+                            <span class="font-medium">Goal:</span> Complete the remaining syllabus, focus on higher-level problems (JEE Main level), and begin incorporating PYQs and mock tests more frequently.
+                        </p>
+                        <h3 class="text-lg font-semibold text-slate-700 mb-3">Daily Schedule (Approximate):</h3>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2 mb-4">
+                            <li><span class="font-medium">Morning (7:00 AM - 10:00 AM):</span> Subject 1 (New Topic / Tougher Problems)</li>
+                            <li><span class="font-medium">Break (10:00 AM - 10:30 AM)</span></li>
+                            <li><span class="font-medium">Late Morning (10:30 AM - 1:30 PM):</span> Subject 2 (New Topic / Tougher Problems)</li>
+                            <li><span class="font-medium">Lunch & Rest (1:30 PM - 3:00 PM)</span></li>
+                            <li><span class="font-medium">Afternoon (3:00 PM - 5:30 PM):</span> Subject 3 (New Topic / Tougher Problems)</li>
+                            <li><span class="font-medium">Short Break (5:30 PM - 6:00 PM)</span></li>
+                            <li><span class="font-medium">Evening (6:00 PM - 8:30 PM):</span> PYQs / Mock Test Analysis / Revision (Allocate specific days for full-length mock tests - at least 2-3 per week in September. On other days, dedicate this slot to solving past year JEE Main questions chapter-wise or mixed, and thorough analysis of your mock test performance.)</li>
+                            <li><span class="font-medium">Dinner & Relax (8:30 PM onwards)</span></li>
+                        </ul>
+                        <h3 class="text-lg font-semibold text-slate-700 mb-3">Weekly Plan (Topics):</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-slate-600">
+                            <div>
+                                <h4 class="font-medium text-slate-700 mb-2">Physics:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>Oscillations & Waves</li>
+                                    <li>Electrostatics</li>
+                                    <li>Current Electricity</li>
+                                    <li>Magnetic Effects of Current & Magnetism</li>
+                                    <li>EMI & AC</li>
+                                    <li>EM Waves</li>
+                                    <li>Optics</li>
+                                    <li>Dual Nature of Matter</li>
+                                    <li>Atoms & Nuclei</li>
+                                    <li>Electronic Devices</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-slate-700 mb-2">Chemistry:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>Chemical Kinetics</li>
+                                    <li>Surface Chemistry</li>
+                                    <li>Classification of Elements & Periodicity</li>
+                                    <li>p-block, d & f block</li>
+                                    <li>Coordination Compounds</li>
+                                    <li>Organic Chemistry Basics (Purification, Characterization, GOC, Hydrocarbons)</li>
+                                    <li>Haloalkanes & Haloarenes</li>
+                                    <li>Alcohols Phenols Ethers</li>
+                                    <li>Aldehydes Ketones Carboxylic Acids</li>
+                                    <li>Amines</li>
+                                    <li>Biomolecules</li>
+                                    <li>Polymers</li>
+                                    <li>Chemistry in Everyday Life</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-slate-700 mb-2">Mathematics:</h4>
+                                <ul class="list-disc list-inside">
+                                    <li>P & C (revisit if needed)</li>
+                                    <li>Matrices & Determinants</li>
+                                    <li>Limits, Continuity & Differentiability</li>
+                                    <li>Integral Calculus</li>
+                                    <li>Differential Equations</li>
+                                    <li>Coordinate Geometry (Conic Sections - Parabola, Ellipse, Hyperbola)</li>
+                                    <li>3D Geometry</li>
+                                    <li>Vector Algebra</li>
+                                    <li>Statistics & Probability</li>
+                                    <li>Mathematical Reasoning</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-slate-700 mt-4"><span class="font-medium">End of September:</span> Your primary goal is to have completed the JEE Main syllabus and have practiced a good number of problems.</p>
+                    </div>
+                </div>
+
+                <!-- Important Notes -->
+                <div class="mb-6 border border-slate-200 rounded-xl overflow-hidden">
+                    <div class="collapsible-header bg-slate-50 p-5 flex justify-between items-center text-slate-800 font-semibold text-lg hover:bg-slate-100 transition-colors duration-200">
+                        <span>Important Notes for the Time Table</span>
+                        <span class="arrow-icon text-slate-500 text-2xl">▶</span>
+                    </div>
+                    <div class="collapsible-content p-5 bg-white">
+                        <ul class="list-disc list-inside text-slate-600 space-y-2">
+                            <li><span class="font-medium">Flexibility:</span> This is a template. Adjust it based on your strengths and weaknesses. If a subject takes longer, reduce time from another.</li>
+                            <li><span class="font-medium">Breaks are Crucial:</span> Don't skip breaks. They prevent burnout and improve retention.</li>
+                            <li><span class="font-medium">Sleep:</span> Aim for 7-8 hours of quality sleep daily. This is non-negotiable for effective learning.</li>
+                            <li><span class="font-medium">Module Usage:</span> For each chapter:
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>Read Theory: Understand concepts from the module.</li>
+                                    <li>Solved Examples: Go through all solved examples carefully.</li>
+                                    <li>Exercise Problems: Solve all problems level by level. Don't move on until you've tried them.</li>
+                                    <li>Mark Difficult Questions: Mark questions you struggled with for future revision.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tipsContent" class="tab-content hidden">
+                <p class="text-slate-700 mb-6 leading-relaxed">
+                    A short attention span can be a challenge, but with the right strategies, you can significantly improve your focus and productivity. This section provides actionable tips to help you stay engaged during your JEE preparation.
+                </p>
+                <h3 class="text-xl font-semibold text-slate-700 mb-4">Tips for a Short Attention Span:</h3>
+                <ul class="list-none space-y-4 text-slate-600">
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">💡</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Pomodoro Technique:</span> Study for 25 minutes intensely, then take a 5-minute break. After four Pomodoros, take a longer break (20-30 minutes). This breaks down study into manageable chunks, making it less daunting.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">✍️</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Active Learning:</span> Don't just read: Highlight, make short notes in the margins, explain concepts aloud to yourself, or try to teach them to an imaginary student. Solve problems as you learn: Don't wait until you've read an entire chapter. As soon as you understand a concept, try a related problem.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">🚫</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Minimize Distractions:</span> Have a clean, organized, and distraction-free study area. Turn off phone notifications and consider using website blockers for social media. Inform your family about your study schedule.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">🔄</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Vary Your Subjects/Topics:</span> Don't stick to one subject for too long. After an hour or two, switch to a different subject or even a different topic within the same subject. This keeps your mind engaged.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">🎯</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Set Micro-Goals:</span> Instead of "Study Physics," set a goal like "Complete the first two exercises of Kinematics module." Achieving these small goals provides a sense of accomplishment and motivates you.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">🎮</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Visualize and Gamify:</span> Use mind maps, flowcharts, and diagrams to understand complex concepts. Treat your study session like a game. Can you beat your previous time for solving a set of problems? Can you get a higher score on a mini-quiz?
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">🎁</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Reward System:</span> Promise yourself a small, non-distracting reward after completing a particularly tough study session or achieving a significant goal (e.g., 15 minutes of your favorite music, a short walk, a healthy snack).
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">🚶</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Regular Breaks with Movement:</span> During your 5-minute breaks, stand up, stretch, walk around, or do a few jumping jacks. This gets blood flowing and refreshes your mind.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">⏰</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Identify Your Peak Hours:</span> Are you a morning person or a night owl? Schedule your most challenging subjects or topics during your most focused hours.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">🧘</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Practice Mindfulness/Meditation:</span> Even 5-10 minutes of guided meditation or deep breathing exercises daily can significantly improve your focus and concentration over time.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">📈</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Don't Aim for Perfection in First Go:</span> Your primary goal for September is syllabus completion. Focus on understanding concepts and solving a decent number of problems. You can always revisit and master topics later.
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="text-blue-500 text-2xl mr-3">📚</span>
+                        <div>
+                            <span class="font-medium text-slate-700">Review Regularly:</span> Short, frequent revisions are better than long, infrequent ones for attention span. Briefly review previous day's topics before starting new ones.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <footer class="text-center mt-8">
+            <p class="text-sm text-slate-500">Designed to support your JEE preparation journey.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const studyPlanTab = document.getElementById('studyPlanTab');
+            const tipsTab = document.getElementById('tipsTab');
+            const studyPlanContent = document.getElementById('studyPlanContent');
+            const tipsContent = document.getElementById('tipsContent');
+            const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+
+            const showTab = (tabToShow) => {
+                if (tabToShow === 'studyPlan') {
+                    studyPlanTab.classList.add('active');
+                    tipsTab.classList.remove('active');
+                    studyPlanContent.classList.remove('hidden');
+                    tipsContent.classList.add('hidden');
+                } else {
+                    tipsTab.classList.add('active');
+                    studyPlanTab.classList.remove('active');
+                    tipsContent.classList.remove('hidden');
+                    studyPlanContent.classList.add('hidden');
+                }
+            };
+
+            studyPlanTab.addEventListener('click', () => showTab('studyPlan'));
+            tipsTab.addEventListener('click', () => showTab('tips'));
+
+            collapsibleHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const arrow = header.querySelector('.arrow-icon');
+                    content.classList.toggle('expanded');
+                    arrow.classList.toggle('rotated');
+                });
+            });
+
+            // Initialize the first collapsible section to be open for immediate content visibility
+            if (collapsibleHeaders.length > 0) {
+                collapsibleHeaders[0].nextElementSibling.classList.add('expanded');
+                collapsibleHeaders[0].querySelector('.arrow-icon').classList.add('rotated');
+            }
+        });
+    </script>
+</body>
+</html>
