@@ -34,75 +34,84 @@
   backdrop-filter: blur(10px) saturate(180%);
   -webkit-backdrop-filter: blur(10px) saturate(180%);
 
-  border-radius: 10px;
+  /* Border and shadow remain visually similar relative to size */
+  border-radius: 8px; /* Slightly reduced border-radius */
   border: 1px solid rgba(0, 0, 0, 0.8);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Adjusted for smaller size */
 
   /* Positioning context for the pseudo-element */
   position: relative;
-  overflow: hidden; /* Ensures the image doesn't go outside border-radius */
+  overflow: hidden;
 
   /* Flexbox for content alignment */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px; /* Reduced gap */
 
-  /* Button basic styles */
-  padding: 20px 30px;
+  /* Smaller Button Dimensions */
+  padding: 17px 25px; /* Reduced padding */
+  min-width: 210px; /* Reduced min-width by ~15% */
+  height: 128px; /* Reduced height by ~15% */
+
   cursor: pointer;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
   font-family: sans-serif;
-  min-width: 250px;
-  height: 150px;
-  z-index: 1; /* Ensure button content is above the image pseudo-element */
+  z-index: 1;
+
+  /* Initial transform state for animation (no scale here, it's handled by direct dimensions) */
+  transform: translateY(0); /* Only translateY for lift animation */
+
+  /* SMOOTH TRANSITION FOR ALL ANIMATED PROPERTIES */
+  transition: all 0.4s ease-in-out;
 }
 
 /* Pseudo-element for the background image */
 .tips-container::before {
-  content: ''; /* Required for pseudo-elements */
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   background-image: url(your-background-image.jpg.jpg); /* REPLACE WITH YOUR IMAGE PATH */
-  background-size: cover; /* Cover the entire area */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
   /* Initial state: no blur */
   filter: blur(0px);
-  -webkit-filter: blur(0px); /* For Safari */
-  transition: filter 0.5s ease; /* Smooth transition for the blur effect */
+  -webkit-filter: blur(0px);
+  transition: filter 0.5s ease-out;
 
-  z-index: -1; /* Place this image behind the main button content and glassmorphism overlay */
+  z-index: -1;
+}
+
+/* HOVER ANIMATIONS (adjusted for smaller size) */
+.tips-container:hover {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Adjusted for smaller size */
+  transform: translateY(-4px); /* Slightly less lift for smaller button */
+  /* No scale here, as we adjusted base dimensions directly. */
 }
 
 /* Hover effect for the background image blur */
 .tips-container:hover::before {
-  filter: blur(5px); /* Apply blur on hover (adjust value as needed) */
-  -webkit-filter: blur(5px);
-}
-
-/* Existing hover effects for the container itself */
-.tips-container:hover {
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  filter: blur(7px); /* Slightly less blur, proportional to size */
+  -webkit-filter: blur(7px);
 }
 
 /* Ensure text and sub-tip are visible above the background image */
 .main-tip-link,
 .sub-tip {
-  position: relative; /* Make sure these elements are above the ::before pseudo-element */
-  z-index: 2; /* Higher z-index than ::before and the container's z-index:1 */
+  position: relative;
+  z-index: 2;
 }
 
 .main-tip-link {
   color: #000;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 20px; /* Reduced font size */
   font-weight: bold;
   text-align: center;
 }
@@ -110,16 +119,16 @@
 .sub-tip {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px; /* Reduced gap inside sub-tip */
   background-color: #000;
   color: #fff;
-  padding: 8px 15px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 7px 13px; /* Reduced padding */
+  border-radius: 18px; /* Adjusted border-radius */
+  font-size: 12px; /* Reduced font size */
 }
 
 .arrow {
-  font-size: 16px;
+  font-size: 13px; /* Reduced font size */
 }
     </style>
 </head>
