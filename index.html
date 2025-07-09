@@ -29,56 +29,97 @@
             display: block;
         }
        .tips-container {
-  /* Glassmorphism styles */
-  background: rgba(255, 255, 255, 0.2); /* White with 20% opacity */
-  backdrop-filter: blur(10px) saturate(180%); /* Blur and saturate background */
-  -webkit-backdrop-filter: blur(10px) saturate(180%); /* For Safari */
-  border-radius: 10px; /* Slightly rounded corners */
-  border: 1px solid rgba(0, 0, 0, 0.8); /* Black border with 80% opacity */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  /* Glassmorphism base (transparent overlay) */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+  /* Positioning context for the pseudo-element */
+  position: relative;
+  overflow: hidden; /* Ensures the image doesn't go outside border-radius */
 
   /* Flexbox for content alignment */
   display: flex;
-  flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
-  gap: 10px; /* Space between the two text lines */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 
   /* Button basic styles */
-  padding: 20px 30px; /* Increased padding for the larger button */
+  padding: 20px 30px;
   cursor: pointer;
   transition: background 0.3s ease, box-shadow 0.3s ease;
-  font-family: sans-serif; /* Apply font to the whole button */
-  min-width: 250px; /* Ensure a minimum width similar to the image */
-  height: 150px; /* Set a fixed height to match the image's proportions */
+  font-family: sans-serif;
+  min-width: 250px;
+  height: 150px;
+  z-index: 1; /* Ensure button content is above the image pseudo-element */
 }
 
+/* Pseudo-element for the background image */
+.tips-container::before {
+  content: ''; /* Required for pseudo-elements */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(your-background-image.jpg.jpg); /* REPLACE WITH YOUR IMAGE PATH */
+  background-size: cover; /* Cover the entire area */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+
+  /* Initial state: no blur */
+  filter: blur(0px);
+  -webkit-filter: blur(0px); /* For Safari */
+  transition: filter 0.5s ease; /* Smooth transition for the blur effect */
+
+  z-index: -1; /* Place this image behind the main button content and glassmorphism overlay */
+}
+
+/* Hover effect for the background image blur */
+.tips-container:hover::before {
+  filter: blur(5px); /* Apply blur on hover (adjust value as needed) */
+  -webkit-filter: blur(5px);
+}
+
+/* Existing hover effects for the container itself */
 .tips-container:hover {
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* Ensure text and sub-tip are visible above the background image */
+.main-tip-link,
+.sub-tip {
+  position: relative; /* Make sure these elements are above the ::before pseudo-element */
+  z-index: 2; /* Higher z-index than ::before and the container's z-index:1 */
+}
+
 .main-tip-link {
-  color: #000; /* Black text for the main link */
-  text-decoration: none; /* Remove underline */
-  font-size: 24px; /* Larger font size for main text */
-  font-weight: bold; /* Bold text */
+  color: #000;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
   text-align: center;
 }
 
 .sub-tip {
   display: flex;
   align-items: center;
-  gap: 5px; /* Space between "tips button" and arrow */
-  background-color: #000; /* Black background for the sub-tip bar */
-  color: #fff; /* White text for the sub-tip */
+  gap: 5px;
+  background-color: #000;
+  color: #fff;
   padding: 8px 15px;
-  border-radius: 20px; /* Rounded pill shape */
+  border-radius: 20px;
   font-size: 14px;
 }
 
 .arrow {
-  font-size: 16px; /* Size of the arrow */
+  font-size: 16px;
 }
     </style>
 </head>
