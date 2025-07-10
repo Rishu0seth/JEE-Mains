@@ -175,6 +175,10 @@
 .arrow {
   font-size: 13px; /* Reduced font size */
 }
+.div_buttons {
+    display: flex;
+    justify-content: center;
+}
     </style>
 </head>
 <body> <div class="container mx-auto max-w-2xl p-4 sm:p-6 md:p-8 min-h-screen">
@@ -198,15 +202,23 @@
             </div>
         </main>
 
-        <footer class="text-center mt-8">
-            <p class="text-sm text-slate-500 glass-effect p-2 rounded-lg inline-block">Your progress is saved automatically in your browser.</p><br><center>
-            <button class="tips-container">
-                <a href="tips.html" class="main-tip-link">Click Here for tips</a>
+        <footer class="text-center mt-8"><br>
+            <p class="text-sm text-slate-500 glass-effect p-2 rounded-lg inline-block">Your progress is saved automatically in your browser.</p><br><br>
+           <div class="div_buttons">
+             <button class="tips-container">
+                <a href="tips.html" class="main-tip-link">Click Here for <br>tips</a>
                 <div class="sub-tip">
                     <span> <a href="tips.html">Tips!</a></span>
                     <span class="arrow">&#x2193;</span>
                 </div>
-            </button></center>
+            </button> <a href="Stopwatch Opensourced/Stopwatch_timer/stopwatch.html"><button class="tips-container" >
+                <a href="Stopwatch Opensourced/Stopwatch_timer/stopwatch.html" class="main-tip-link">Click here for <br>Stopwatch</a>
+                <div class="sub-tip">
+                    <span> <a href="Stopwatch Opensourced/Stopwatch_timer/stopwatch.html">Stopwatch</a></span>
+                    <span class="arrow">&#x2193;</span>
+                </div>
+            </button></a>
+           </div>
         </footer>
     </div>
 
